@@ -6,6 +6,7 @@ import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/theme";
+import { SignIn } from "@screens/SignIn";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -45,7 +46,9 @@ export default function App() {
         style={{
           flex: 1,
         }}
-      ></View>
+      >
+        <SignIn />
+      </View>
     </ThemeProvider>
   );
 }
