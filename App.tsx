@@ -7,6 +7,7 @@ import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/theme";
 import { SignIn } from "@screens/SignIn";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -47,6 +48,7 @@ export default function App() {
           flex: 1,
         }}
       >
+        <StatusBar style="light" translucent backgroundColor="transparent" />
         <SignIn />
       </View>
     </ThemeProvider>
