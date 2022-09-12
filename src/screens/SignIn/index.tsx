@@ -6,8 +6,19 @@ import { Button } from "@components/Button";
 import brandImg from "@assets/brand.png";
 
 import * as S from "./styles";
+import { useAuth } from "@hooks/auth";
+import { useState } from "react";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signIn, isLogging } = useAuth();
+
+  function handleSignIn() {
+    signIn(email, password);
+  }
+
   return (
     <S.Container>
       <KeyboardAvoidingView
@@ -22,14 +33,25 @@ export function SignIn() {
             type="secondary"
             autoCorrect={false}
             autoCapitalize="none"
+            onChangeText={setEmail}
           />
-          <Input placeholder="Password" type="secondary" secureTextEntry />
+          <Input
+            placeholder="Password"
+            type="secondary"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
 
           <S.ForgotPasswordButton>
             <S.ForgotPasswordLabel>Esqueci minha senha</S.ForgotPasswordLabel>
           </S.ForgotPasswordButton>
 
-          <Button title="Entrar" type="secondary" />
+          <Button
+            title="Entrar"
+            type="secondary"
+            onPress={handleSignIn}
+            isLoading={isLogging}
+          />
         </S.Content>
       </KeyboardAvoidingView>
     </S.Container>
