@@ -1,5 +1,6 @@
-import { Input } from "@components/Input";
 import * as S from "./styles";
+import { Input } from "@components/Input";
+import { Button } from "@components/Button";
 
 export function SignIn() {
   return (
@@ -11,6 +12,8 @@ export function SignIn() {
         autoCapitalize="none"
       />
       <Input placeholder="Password" type="secondary" secureTextEntry />
+
+      <Button title="Entrar" type="secondary" />
     </S.Container>
   );
 }
