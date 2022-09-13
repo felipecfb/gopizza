@@ -10,6 +10,7 @@ import { SignIn } from "@screens/SignIn";
 import { AuthProvider } from "@hooks/auth";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Product } from "@screens/Product";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -53,7 +54,7 @@ export default function App() {
         >
           <StatusBar style="light" translucent backgroundColor="transparent" />
           <AuthProvider>
-            <SignIn />
+            <Product />
           </AuthProvider>
         </View>
       </GestureHandlerRootView>
