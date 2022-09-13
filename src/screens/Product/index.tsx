@@ -17,7 +17,10 @@ export function Product() {
         </TouchableOpacity>
       </S.Header>
 
-      <Photo uri="" />
+      <S.Upload>
+        <Photo uri="" />
+        <S.PickImageButton title="Carregar" type="secondary" />
+      </S.Upload>
     </S.Container>
   );
 }
