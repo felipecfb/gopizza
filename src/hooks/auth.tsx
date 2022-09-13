@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Alert } from "react-native";
 
 import auth from "@react-native-firebase/auth";
@@ -13,6 +19,7 @@ type User = {
 
 type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   isLogging: boolean;
   user: User | null;
 };
@@ -89,20 +96,28 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     if (storedUser) {
       const userData = JSON.parse(storedUser) as User;
+      console.log(userData);
       setUser(userData);
     }
 
     setIsLogging(false);
   }
 
+  async function signOut() {
+    await auth().signOut();
+    await AsyncStorage.removeItem(USER_COLLECTION);
+    setUser(null);
+  }
+
   useEffect(() => {
     loadUserStorageData();
-  }, [])
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         signIn,
+        signOut,
         isLogging,
         user,
       }}
