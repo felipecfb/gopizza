@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Platform, TouchableOpacity } from "react-native";
+import { Platform, ScrollView, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 import { ButtonBack } from "@components/ButtonBack";
-import { Photo } from "@components/Photo";
 import { InputPrice } from "@components/InputPrice";
+import { Button } from "@components/Button";
+import { Input } from "@components/Input";
+import { Photo } from "@components/Photo";
 
 import * as S from "./styles";
 
@@ -25,9 +27,11 @@ export function Product() {
       }
     }
   }
-  
+
   return (
+ 
     <S.Container behavior={Platform.OS === "ios" ? "padding" : undefined}>
+         <ScrollView showsVerticalScrollIndicator={false}>
       <S.Header>
         <ButtonBack />
         <S.Title>Cadastrar</S.Title>
@@ -45,9 +49,30 @@ export function Product() {
         />
       </S.Upload>
 
-      <InputPrice size="P" />
-      <InputPrice size="M" />
-      <InputPrice size="G" />
+      <S.Form>
+        <S.InputGroup>
+          <S.Label>Nome</S.Label>
+          <Input />
+        </S.InputGroup>
+
+        <S.InputGroup>
+          <S.InputGroupHeader>
+            <S.Label>Descrição</S.Label>
+            <S.MaxCharacters>0 de 60 caracteres</S.MaxCharacters>
+          </S.InputGroupHeader>
+          <Input multiline maxLength={60} style={{ height: 80 }} />
+        </S.InputGroup>
+
+        <S.InputGroup>
+          <S.Label>Tamamhos e preços</S.Label>
+          <InputPrice size="P" />
+          <InputPrice size="M" />
+          <InputPrice size="G" />
+        </S.InputGroup>
+
+        <Button title="Cadastrar pizza" />
+      </S.Form>
+      </ScrollView>
     </S.Container>
   );
 }
