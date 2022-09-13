@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Platform, ScrollView, TouchableOpacity } from "react-native";
+import { Platform, ScrollView, TouchableOpacity, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 import { ButtonBack } from "@components/ButtonBack";
@@ -31,6 +31,27 @@ export function Product() {
       if (!result.cancelled) {
         setImage(result.uri);
       }
+    }
+  }
+
+  async function handleAdd() {
+    if (!name.trim()) {
+      return Alert.alert("Cadastro", "Informe o nome da pizza.");
+    }
+
+    if (!description.trim()) {
+      return Alert.alert("Cadastro", "Informe a descrição da pizza.");
+    }
+
+    if (!image) {
+      return Alert.alert("Cadastro", "Seleciona a imagem da pizza");
+    }
+
+    if (!priceSizeP || !priceSizeM || !priceSizeG) {
+      return Alert.alert(
+        "Cadastro",
+        "Informe o preço de todos os tamanhos da pizza."
+      );
     }
   }
 
@@ -93,7 +114,11 @@ export function Product() {
             />
           </S.InputGroup>
 
-          <Button title="Cadastrar pizza" isLoading={isLoading} />
+          <Button
+            title="Cadastrar pizza"
+            isLoading={isLoading}
+            onPress={handleAdd}
+          />
         </S.Form>
       </ScrollView>
     </S.Container>
