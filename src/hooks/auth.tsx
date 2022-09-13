@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 import auth from "@react-native-firebase/auth";
@@ -81,6 +81,23 @@ function AuthProvider({ children }: AuthProviderProps) {
         setIsLogging(false);
       });
   }
+
+  async function loadUserStorageData() {
+    setIsLogging(true);
+
+    const storedUser = await AsyncStorage.getItem(USER_COLLECTION);
+
+    if (storedUser) {
+      const userData = JSON.parse(storedUser) as User;
+      setUser(userData);
+    }
+
+    setIsLogging(false);
+  }
+
+  useEffect(() => {
+    loadUserStorageData();
+  }, [])
 
   return (
     <AuthContext.Provider
