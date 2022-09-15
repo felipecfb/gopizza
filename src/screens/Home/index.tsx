@@ -26,6 +26,11 @@ export function Home() {
       </S.Header>
 
       <Search onSearch={() => {}} onClear={() => {}} />
+
+      <S.MenuHeader>
+        <S.Title>Cardápio</S.Title>
+        <S.MenuItemsNumber>10 pizzas</S.MenuItemsNumber>
+      </S.MenuHeader>
     </S.Container>
   );
 }
