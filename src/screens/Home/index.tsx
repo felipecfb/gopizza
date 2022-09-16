@@ -8,6 +8,7 @@ import { Search } from "@components/Search";
 
 import { useTheme } from "styled-components/native";
 import * as S from "./styles";
+import { ProductCard } from "@components/ProductCard";
 
 export function Home() {
   const { COLORS } = useTheme();
@@ -31,6 +32,15 @@ export function Home() {
         <S.Title>Cardápio</S.Title>
         <S.MenuItemsNumber>10 pizzas</S.MenuItemsNumber>
       </S.MenuHeader>
+
+      <ProductCard
+        data={{
+          id: "1",
+          name: "Pizza",
+          description: "Qualquer coisa",
+          photo_url: "https://github.com/felipecfb.png",
+        }}
+      />
     </S.Container>
   );
 }
