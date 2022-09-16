@@ -6,12 +6,10 @@ import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 import { DMSerifDisplay_400Regular } from "@expo-google-fonts/dm-serif-display";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/theme";
-import { SignIn } from "@screens/SignIn";
 import { AuthProvider } from "@hooks/auth";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Product } from "@screens/Product";
-import { Home } from "@screens/Home";
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -55,7 +53,7 @@ export default function App() {
         >
           <StatusBar style="light" translucent backgroundColor="transparent" />
           <AuthProvider>
-            <Home />
+            <Routes />
           </AuthProvider>
         </View>
       </GestureHandlerRootView>
