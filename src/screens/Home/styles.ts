@@ -33,7 +33,7 @@ export const GreetingText = styled.Text`
   font-size: 20px;
 
   ${({ theme }) => css`
-    font-family: {theme.FONTS.TITLE};
+    font-family: ${theme.FONTS.TITLE};
     color: ${theme.COLORS.TITLE};
   `}
 `;
