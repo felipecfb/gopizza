@@ -11,6 +11,8 @@ export function Order() {
       <S.Header>
         <ButtonBack onPress={() => {}} style={{ marginBottom: 108 }} />
       </S.Header>
+
+      <S.Photo source={{ uri: "http://github.com/felipecfb.png" }} />
     </S.Container>
   );
 }
