@@ -57,6 +57,10 @@ export function Home() {
     navigation.navigate("product", { id });
   }
 
+  function handleAdd() {
+    navigation.navigate("product", {});
+  }
+
   useEffect(() => {
     fetchPizzas("");
   }, []);
@@ -98,6 +102,11 @@ export function Home() {
           paddingBottom: 125,
           marginHorizontal: 24,
         }}
+      />
+      <S.NewProductButton
+        title="Cadastrar Pizza"
+        type="secondary"
+        onPress={handleAdd}
       />
     </S.Container>
   );
