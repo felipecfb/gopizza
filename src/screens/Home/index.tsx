@@ -89,7 +89,7 @@ export function Home() {
 
       <S.MenuHeader>
         <S.Title>Cardápio</S.Title>
-        <S.MenuItemsNumber>10 pizzas</S.MenuItemsNumber>
+        <S.MenuItemsNumber>{pizzas.length} {pizzas.length !== 1 ? "pizzas" : "pizza"}</S.MenuItemsNumber>
       </S.MenuHeader>
 
       <FlatList
