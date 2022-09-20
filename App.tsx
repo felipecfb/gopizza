@@ -55,7 +55,7 @@ export default function App() {
         >
           <StatusBar style="light" translucent backgroundColor="transparent" />
           <AuthProvider>
-            <Orders />
+            <Routes />
           </AuthProvider>
         </View>
       </GestureHandlerRootView>
