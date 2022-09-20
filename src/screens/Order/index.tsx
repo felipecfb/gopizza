@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Platform, ScrollView } from "react-native";
+import { Platform } from "react-native";
 
 import { ButtonBack } from "@components/ButtonBack";
 import { RadioButton } from "@components/RadioButton";

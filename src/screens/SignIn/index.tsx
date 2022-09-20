@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 
 import { Input } from "@components/Input";
@@ -5,9 +6,9 @@ import { Button } from "@components/Button";
 
 import brandImg from "@assets/brand.png";
 
-import * as S from "./styles";
 import { useAuth } from "@hooks/auth";
-import { useState } from "react";
+
+import * as S from "./styles";
 
 export function SignIn() {
   const [email, setEmail] = useState("");

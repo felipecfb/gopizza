@@ -1,10 +1,10 @@
 import React from 'react';
+import { FlatList } from 'react-native-gesture-handler';
 
 import { OrderCard } from "@components/OrderCard";
 import { ItemSeparator } from "@components/ItemSeparator";
 
 import * as S from './styles';
-import { FlatList } from 'react-native-gesture-handler';
 
 export function Orders() {
   return (

@@ -1,16 +1,17 @@
 import React, { useState, useCallback } from "react";
 import { Alert, FlatList, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { useTheme } from "styled-components/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import firestore from "@react-native-firebase/firestore";
+
+import { MaterialIcons } from "@expo/vector-icons";
 
 import happyEmoji from "@assets/happy.png";
 
 import { Search } from "@components/Search";
-
-import { useTheme } from "styled-components/native";
-import * as S from "./styles";
 import { ProductCard, ProductProps } from "@components/ProductCard";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+
+import * as S from "./styles";
 
 export function Home() {
   const [pizzas, setPizzas] = useState<ProductProps[]>([]);
