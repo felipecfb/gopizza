@@ -3,11 +3,15 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { UserStackRoutes } from "./user.stack.routes";
 import { UserTabRoutes } from "./user.tab.routes";
+import { useAuth } from "@hooks/auth";
+import { SignIn } from "@screens/SignIn";
 
 export function Routes() {
+  const { user } = useAuth();
+
   return (
     <NavigationContainer>
-      <UserTabRoutes />
+      {user ? <UserTabRoutes /> : <SignIn />}
     </NavigationContainer>
   )
 }

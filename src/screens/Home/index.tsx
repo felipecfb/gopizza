@@ -8,12 +8,16 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import happyEmoji from "@assets/happy.png";
 
+import { useAuth } from "@hooks/auth";
+
 import { Search } from "@components/Search";
 import { ProductCard, ProductProps } from "@components/ProductCard";
 
 import * as S from "./styles";
 
 export function Home() {
+  const { signOut, user } = useAuth();
+
   const [pizzas, setPizzas] = useState<ProductProps[]>([]);
   const [search, setSearch] = useState("");
 
@@ -76,7 +80,7 @@ export function Home() {
           <S.GreetingText>Olá, Admin</S.GreetingText>
         </S.Greeting>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={signOut}>
           <MaterialIcons name="logout" color={COLORS.TITLE} size={24} />
         </TouchableOpacity>
       </S.Header>
@@ -90,7 +94,9 @@ export function Home() {
 
       <S.MenuHeader>
         <S.Title>Cardápio</S.Title>
-        <S.MenuItemsNumber>{pizzas.length} {pizzas.length !== 1 ? "pizzas" : "pizza"}</S.MenuItemsNumber>
+        <S.MenuItemsNumber>
+          {pizzas.length} {pizzas.length !== 1 ? "pizzas" : "pizza"}
+        </S.MenuItemsNumber>
       </S.MenuHeader>
 
       <FlatList
@@ -106,11 +112,13 @@ export function Home() {
           marginHorizontal: 24,
         }}
       />
-      <S.NewProductButton
-        title="Cadastrar Pizza"
-        type="secondary"
-        onPress={handleAdd}
-      />
+      {user?.isAdmin && (
+        <S.NewProductButton
+          title="Cadastrar Pizza"
+          type="secondary"
+          onPress={handleAdd}
+        />
+      )}
     </S.Container>
   );
 }
