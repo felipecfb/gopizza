@@ -16,7 +16,6 @@ export function UserStackRoutes() {
 
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      ´
       {user?.isAdmin ? (
         <Group>
           <Screen name="home" component={Home} />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { ButtonBack } from "@components/ButtonBack";
 import { RadioButton } from "@components/RadioButton";
@@ -11,13 +12,18 @@ import { PIZZA_TYPES } from "@utils/pizzaTypes";
 import * as S from "./styles";
 
 export function Order() {
+  const navigation = useNavigation();
   const [size, setSize] = useState("");
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
 
   return (
     <S.Container behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <S.ContentScroll>
         <S.Header>
-          <ButtonBack onPress={() => {}} style={{ marginBottom: 108 }} />
+          <ButtonBack onPress={handleGoBack} style={{ marginBottom: 108 }} />
         </S.Header>
 
         <S.Photo source={{ uri: "http://github.com/felipecfb.png" }} />
