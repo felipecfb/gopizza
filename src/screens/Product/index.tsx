@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Alert,
   View,
+  LogBox,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import firestore from "@react-native-firebase/firestore";
@@ -126,6 +127,24 @@ export function Product() {
       });
   }
 
+  async function handleUpdate() {
+    firestore()
+      .collection("pizzas")
+      .doc(id)
+      .update({
+        name: name,
+        name_insensitive: name.toLowerCase().trim(),
+        description: description,
+        prices_sizes: {
+          p: priceSizeP,
+          m: priceSizeM,
+          g: priceSizeG,
+        },
+      })
+      .then(() => navigation.navigate("home"))
+      .catch(() => Alert.alert("Não foi possível atualizar a pizza!"));
+  }
+
   useEffect(() => {
     if (id) {
       firestore()
@@ -211,11 +230,17 @@ export function Product() {
             />
           </S.InputGroup>
 
-          {!id && (
+          {!id ? (
             <Button
               title="Cadastrar pizza"
               isLoading={isLoading}
               onPress={handleAdd}
+            />
+          ) : (
+            <Button
+              title="Atualizar pizza"
+              isLoading={isLoading}
+              onPress={handleUpdate}
             />
           )}
         </S.Form>

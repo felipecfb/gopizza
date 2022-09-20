@@ -7,7 +7,7 @@ import { UserTabRoutes } from "./user.tab.routes";
 export function Routes() {
   return (
     <NavigationContainer>
-      <UserTabRoutes />
+      <UserStackRoutes />
     </NavigationContainer>
   )
 }
