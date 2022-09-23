@@ -14,6 +14,7 @@ import { PIZZA_TYPES } from "@utils/pizzaTypes";
 import { OrderNavigationProps } from "@src/@types/navigation";
 
 import * as S from "./styles";
+import { useAuth } from "@hooks/auth";
 
 type PizzaResponse = ProductProps & {
   prices_sizes: {
@@ -22,10 +23,13 @@ type PizzaResponse = ProductProps & {
 };
 
 export function Order() {
+  const { user } = useAuth();
+
   const [size, setSize] = useState("");
   const [pizza, setPizza] = useState<PizzaResponse>({} as PizzaResponse);
   const [quantity, setQuantity] = useState(0);
   const [tableNumber, setTableNumber] = useState("");
+  const [sendingOrder, setSendingOrder] = useState(false);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -35,6 +39,42 @@ export function Order() {
 
   function handleGoBack() {
     navigation.goBack();
+  }
+
+  function handleOrder() {
+    if (!size) {
+      return Alert.alert("Pedido", "Selecone o tamanho da pizza.");
+    }
+
+    if (!tableNumber) {
+      return Alert.alert("Pedido", "Informe o número da mesa.");
+    }
+
+    if (!quantity) {
+      return Alert.alert("Pedido", "Informe a quantidade.");
+    }
+
+    setSendingOrder(true);
+
+    firestore()
+      .collection("orders")
+      .add({
+        quantity,
+        amount,
+        pizza: pizza.name,
+        size,
+        table_number: tableNumber,
+        status: "Preparando",
+        waiter_id: user?.id,
+        image: pizza.photo_url,
+      })
+      .then(() => {
+        navigation.navigate("home");
+      })
+      .catch(() => {
+        Alert.alert("Pedido", "Não foi possível realizar o pedido.");
+        setSendingOrder(false);
+      });
   }
 
   useEffect(() => {
@@ -81,13 +121,20 @@ export function Order() {
 
             <S.InputGroup>
               <S.Label>Quantidade</S.Label>
-              <Input keyboardType="numeric" onChangeText={(value) => setQuantity(Number(value))} />
+              <Input
+                keyboardType="numeric"
+                onChangeText={(value) => setQuantity(Number(value))}
+              />
             </S.InputGroup>
           </S.FormRow>
 
           <S.Price>Valor de R$ {amount}</S.Price>
 
-          <Button title="Confirmar pedido" />
+          <Button
+            title="Confirmar pedido"
+            onPress={handleOrder}
+            isLoading={sendingOrder}
+          />
         </S.Form>
       </S.ContentScroll>
     </S.Container>
